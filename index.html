@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#0f5c8a">
   <meta name="description" content="115年三院區健康促進活動－走向巔峰爭奪戰團隊步數登記">
   <link rel="manifest" href="./manifest.webmanifest">
@@ -71,6 +71,310 @@ table{border-collapse:separate;border-spacing:0;min-width:980px;width:100%;font-
 }
 @media (max-width:560px){
   .hero{padding-top:22px}.peak{display:none}.form-grid{grid-template-columns:1fr}.form-grid .full{grid-column:auto}.metrics-grid{grid-template-columns:1fr 1fr}.team-summary{grid-template-columns:1fr}.member-cards{grid-template-columns:1fr}.card{padding:16px}.bar-row{grid-template-columns:62px 1fr 62px}
+}
+
+
+/* =========================================================
+   RESPONSIVE FIX v2
+   防止 Grid / 圖表 / 表格把整個頁面撐出螢幕
+========================================================= */
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  min-width: 0;
+}
+
+.hero,
+.container,
+.card,
+.entry-card,
+.metrics-grid,
+.metric,
+.team-summary,
+.summary-box,
+.member-cards,
+.member-card,
+.two-col,
+.two-col > div,
+.trend-wrap,
+.heatmap-wrap,
+.form-grid,
+.form-grid > label,
+.section-title {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.hero {
+  width: 100%;
+}
+
+.hero-inner,
+.hero-chips {
+  width: min(1120px, calc(100% - 28px));
+  max-width: 1120px;
+}
+
+.container {
+  width: min(1120px, calc(100% - 28px));
+  max-width: 1120px;
+  margin: 18px auto 44px;
+  padding: 0;
+}
+
+.form-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.form-grid .full {
+  min-width: 0;
+}
+
+input,
+select,
+button {
+  min-width: 0;
+  max-width: 100%;
+}
+
+input[type="date"] {
+  width: 100%;
+}
+
+.metrics-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.team-summary {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.member-cards {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.two-col {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* 圖表僅在自己的容器內捲動，不影響整頁 */
+.trend-wrap {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.trend-svg {
+  display: block;
+  width: 100%;
+  min-width: 680px;
+  max-width: none;
+}
+
+/* 30日總覽只在表格區塊左右滑 */
+.heatmap-wrap {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.heatmap-wrap table {
+  width: max-content;
+  min-width: 100%;
+}
+
+/* 卡片文字避免撐開 */
+.metric,
+.member-card,
+.summary-box,
+.coach-item,
+.advice-box {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* 平板 */
+@media (max-width: 980px) {
+  .metrics-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .member-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .two-col {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-inner {
+    align-items: flex-start;
+  }
+
+  .peak {
+    font-size: 46px;
+  }
+}
+
+/* 手機 */
+@media (max-width: 640px) {
+  .hero {
+    padding: 20px 0 18px;
+  }
+
+  .hero-inner,
+  .hero-chips,
+  .container {
+    width: min(100% - 20px, 1120px);
+  }
+
+  .hero-inner {
+    display: block;
+  }
+
+  .peak {
+    display: none;
+  }
+
+  h1 {
+    font-size: 32px;
+    line-height: 1.12;
+  }
+
+  .subtitle {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .hero-chips {
+    margin-top: 14px;
+    gap: 6px;
+  }
+
+  .hero-chips span {
+    font-size: 11px;
+    padding: 6px 8px;
+  }
+
+  .container {
+    margin-top: 12px;
+    margin-bottom: 28px;
+    gap: 12px;
+  }
+
+  .card {
+    border-radius: 16px;
+    padding: 14px;
+  }
+
+  .section-title {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  h2 {
+    font-size: 19px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .form-grid .full {
+    grid-column: auto;
+  }
+
+  input,
+  select {
+    font-size: 16px; /* 避免 iPhone 點擊表單時自動放大 */
+    padding: 12px;
+  }
+
+  .primary {
+    min-height: 48px;
+  }
+
+  .metrics-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .metric {
+    padding: 12px;
+    border-radius: 14px;
+  }
+
+  .metric .v {
+    font-size: 22px;
+  }
+
+  .metric .s {
+    font-size: 10px;
+    line-height: 1.4;
+  }
+
+  .team-summary {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .member-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .bar-row {
+    grid-template-columns: 58px minmax(0, 1fr) 64px;
+    gap: 7px;
+  }
+
+  .bar-label,
+  .bar-value {
+    font-size: 11px;
+  }
+
+  .trend-svg {
+    min-width: 620px;
+    height: 230px;
+  }
+
+  .legend {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .toast {
+    left: 10px;
+    right: 10px;
+    bottom: calc(10px + env(safe-area-inset-bottom));
+    max-width: none;
+  }
+}
+
+/* 小手機 */
+@media (max-width: 390px) {
+  h1 {
+    font-size: 28px;
+  }
+
+  .metrics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-chips span {
+    flex: 1 1 auto;
+    text-align: center;
+  }
+
+  .metric .v {
+    font-size: 24px;
+  }
 }
 
 </style>
